@@ -1,0 +1,21 @@
+* @kaiserkarel
+
+/contracts/erc20/ @JayPavlina
+/tests/erc20.test.ts @JayPavlina
+
+/contracts/erc721/ @JayPavlina
+/contracts/erc1155/ @JayPavlina
+
+/contracts/token-accounts/ @JayPavlina
+/tests/token-accounts.test.ts @JayPavlina
+
+/libs/contract-utils/ @JayPavlina
+/libs/multi-token/ @JayPavlina
+/libs/amm/ @kaiserkarel
+
+/.github/workflows/ @kaiserkarel
+/scripts/ @kaiserkarel
+
+/contracts/stable-coin/ @kaiserkarel
+/contracts/claimable-media/ @kaiserkarel
+/tests/stable-coin.test.ts @kaiserkarel

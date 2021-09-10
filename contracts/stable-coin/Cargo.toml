@@ -1,0 +1,54 @@
+[package]
+name = "stable-coin"
+version = "0.1.0"
+authors = ["Karel L. Kubat <k.l.kubat@gmail.com>"]
+edition = "2018"
+resolver = "2"
+
+[dependencies]
+ink_primitives = { version = "3.0.0-rc3", default-features = false }
+ink_metadata = { version = "3.0.0-rc3", default-features = false, features = ["derive"], optional = true }
+ink_env = { version = "3.0.0-rc3", default-features = false }
+ink_storage = { version = "3.0.0-rc3", default-features = false }
+ink_lang = { version = "3.0.0-rc3", default-features = false }
+ink_prelude = { version = "3.0.0-rc3", default-features = false }
+
+scale = { package = "parity-scale-codec", version = "2.1", default-features = false, features = ["derive"] }
+scale-info = { version = "0.6.0", default-features = false, features = ["derive"], optional = true }
+
+err-derive = { version = "0.3.0", default-features = false }
+rust_decimal = { version = "1.14", default-features = false }
+
+multi-token = { path = "../../libs/multi-token", default-features = false, features = ["token-accounts"]}
+token-accounts = { path = "../token-accounts", default-features = false, features = ["ink-as-dependency"] }
+erc20 = { path = "../../contracts/erc20", default-features = false, features = ["ink-as-dependency"] }
+contract-utils = { path = "../../libs/contract-utils", default-features = false }
+
+[dev-dependencies]
+rust_decimal_macros = "1.14"
+
+[lib]
+name = "stable_coin"
+path = "src/lib.rs"
+crate-type = [
+	"cdylib",
+]
+
+[features]
+default = ["std"]
+std = [
+    "ink_metadata/std",
+    "ink_env/std",
+    "ink_storage/std",
+    "ink_primitives/std",
+    "scale/std",
+    "scale-info/std",
+    "token-accounts/std",
+    "multi-token/std",
+    "erc20/std",
+    "contract-utils/std"
+]
+ink-as-dependency = []
+
+[profile.release]
+overflow-checks = false

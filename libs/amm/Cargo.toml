@@ -1,0 +1,36 @@
+[package]
+name = "amm"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "amm"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+
+[dependencies]
+ink_storage = { version = "3.0.0-rc3", default-features = false }
+ink_primitives = { version = "3.0.0-rc3", default-features = false }
+ink_metadata = { version = "3.0.0-rc3", default-features = false, features = ["derive"], optional = true }
+
+scale = { package = "parity-scale-codec", version = "2.1", default-features = false, features = ["derive"] }
+scale-info = { version = "0.6.0", default-features = false, features = ["derive"], optional = true }
+rust_decimal = { version = "1.14", default-features = false, features = ["maths"] }
+contract-utils = { path = "../../libs/contract-utils", default-features = false }
+
+[dev-dependencies]
+rust_decimal_macros = { version = "1.14", default-features = false }
+
+[features]
+default = ["std"]
+std = [
+    "ink_storage/std",
+    "ink_primitives/std",
+    "ink_metadata/std",
+
+    "scale/std",
+    "scale-info/std",
+]

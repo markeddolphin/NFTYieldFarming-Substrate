@@ -1,0 +1,1725 @@
+{
+  "metadataVersion": "0.1.0",
+  "source": {
+    "hash": "0x44aaadd650de080d8dad283542f7f4abfb5226f593393db435fdb60abeb872a2",
+    "language": "ink! 3.0.0-rc3",
+    "compiler": "rustc 1.54.0-nightly"
+  },
+  "contract": {
+    "name": "exchange",
+    "version": "3.0.0-rc3",
+    "authors": [
+      "Parity Technologies <admin@parity.io>"
+    ]
+  },
+  "spec": {
+    "constructors": [
+      {
+        "args": [],
+        "docs": [
+          "Create a new instance.",
+          "* `token_accounts_id` - The `AccountId` for the `TokenAccounts` contract`"
+        ],
+        "name": [
+          "new"
+        ],
+        "selector": "0x9bae9d5e"
+      }
+    ],
+    "docs": [
+      " Contains fhr contract code"
+    ],
+    "events": [
+      {
+        "args": [
+          {
+            "docs": [
+              " Ouput of the event"
+            ],
+            "indexed": false,
+            "name": "output",
+            "type": {
+              "displayName": [
+                "event_output",
+                "CreatedExchangeOutput"
+              ],
+              "type": 40
+            }
+          }
+        ],
+        "docs": [
+          " Emitted when an exchange is created"
+        ],
+        "name": "CreatedExchange"
+      },
+      {
+        "args": [
+          {
+            "docs": [
+              " The output of the event"
+            ],
+            "indexed": false,
+            "name": "output",
+            "type": {
+              "displayName": [
+                "event_output",
+                "PlacedOfferOutput"
+              ],
+              "type": 41
+            }
+          }
+        ],
+        "docs": [
+          " An offer was placed"
+        ],
+        "name": "PlacedOffer"
+      },
+      {
+        "args": [
+          {
+            "docs": [
+              " The output of the event"
+            ],
+            "indexed": false,
+            "name": "output",
+            "type": {
+              "displayName": [
+                "event_output",
+                "CanceledOfferOutput"
+              ],
+              "type": 42
+            }
+          }
+        ],
+        "docs": [
+          " An offer was canceled"
+        ],
+        "name": "CanceledOffer"
+      }
+    ],
+    "messages": [
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "CreateExchangeRequest"
+              ],
+              "type": 22
+            }
+          }
+        ],
+        "docs": [
+          " Creates a new exchange for selling a given asset. It could be an NFT, a social token...",
+          "",
+          " * `exchange_token_id` - ExchangeToken token that is going to be traded through this order book model",
+          " * `initial_amount` - InitialAmount of exchangeToken to sell",
+          " * `offer_token_id` - Token of this first selling offer",
+          " * `price` - Price per each exchange token of the Initial supply"
+        ],
+        "mutates": true,
+        "name": [
+          "create_exchange"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 24
+        },
+        "selector": "0x089e7478"
+      },
+      {
+        "args": [
+          {
+            "name": "id",
+            "type": {
+              "displayName": [
+                "ExchangeId"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " Get an exchange by id"
+        ],
+        "mutates": false,
+        "name": [
+          "get_exchange_by_id"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Option"
+          ],
+          "type": 32
+        },
+        "selector": "0x1732d0c1"
+      },
+      {
+        "args": [
+          {
+            "name": "id",
+            "type": {
+              "displayName": [
+                "ExchangeId"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " Get all of the offers for an exchange"
+        ],
+        "mutates": false,
+        "name": [
+          "get_exchange_offers"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Option"
+          ],
+          "type": 34
+        },
+        "selector": "0xd16e92e0"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "PlaceOfferRequest"
+              ],
+              "type": 37
+            }
+          }
+        ],
+        "docs": [
+          " Creates a new buy offer for the asset. It could be an NFT, a social token...",
+          "",
+          " * `exchange_id` - Id of the exchange",
+          " * `token_id` - Token of the offer",
+          " * `amount` - Amount of token for the order book",
+          " * `price` - Price per each exchange token of the Initial supply"
+        ],
+        "mutates": true,
+        "name": [
+          "place_buying_offer"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 24
+        },
+        "selector": "0xd2a68710"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "PlaceOfferRequest"
+              ],
+              "type": 37
+            }
+          }
+        ],
+        "docs": [
+          " Creates a new sell offer for the asset. It could be an NFT, a social token...",
+          "",
+          " * `exchange_id` - Id of the exchange",
+          " * `token_id` - Token of the offer",
+          " * `amount` - Amount of token for the order book",
+          " * `price` - Price per each exchange token of the Initial supply"
+        ],
+        "mutates": true,
+        "name": [
+          "place_selling_offer"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 24
+        },
+        "selector": "0x666cca00"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "CancelOfferRequest"
+              ],
+              "type": 38
+            }
+          }
+        ],
+        "docs": [
+          " Cancels a buying offer",
+          "",
+          " * `exchange_id` - The exchange id",
+          " * `offer_id` - The offer id"
+        ],
+        "mutates": true,
+        "name": [
+          "cancel_buying_offer"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 24
+        },
+        "selector": "0xc7377fdb"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "CancelOfferRequest"
+              ],
+              "type": 38
+            }
+          }
+        ],
+        "docs": [
+          " Cancels a selling offer",
+          "",
+          " * `exchange_id` - The exchange id",
+          " * `offer_id` - The offer id"
+        ],
+        "mutates": true,
+        "name": [
+          "cancel_selling_offer"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 24
+        },
+        "selector": "0x13b7cb0b"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "OfferRequest"
+              ],
+              "type": 39
+            }
+          }
+        ],
+        "docs": [
+          " Buy from a sell offer of a given asset.",
+          "",
+          " `exchange_id` - Id of the exchange",
+          " `offer_id` - Id of the offer",
+          " `buyer_account` - Account of the buyer",
+          " `amount` - Amount of token for the order book"
+        ],
+        "mutates": true,
+        "name": [
+          "buy_from_offer"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 24
+        },
+        "selector": "0x4f4028c2"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "OfferRequest"
+              ],
+              "type": 39
+            }
+          }
+        ],
+        "docs": [
+          " Sell to a buy offer",
+          "",
+          " `exchange_id` - Id of the exchange",
+          " `offer_id` - Id of the offer",
+          " `seller_account` - Account of the buyer",
+          " `amount` - Amount of token for the order book"
+        ],
+        "mutates": true,
+        "name": [
+          "sell_from_offer"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 24
+        },
+        "selector": "0xca135115"
+      }
+    ]
+  },
+  "storage": {
+    "struct": {
+      "fields": [
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0100000000000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0100000001000000000000000000000000000000000000000000000000000000",
+                                          "ty": 3
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0200000000000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0200000001000000000000000000000000000000000000000000000000000000",
+                          "ty": 8
+                        }
+                      },
+                      "offset": "0x0100000001000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "exchanges_by_id"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0200000001000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0300000001000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0300000002000000000000000000000000000000000000000000000000000000",
+                                          "ty": 3
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0400000001000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0400000002000000000000000000000000000000000000000000000000000000",
+                          "ty": 17
+                        }
+                      },
+                      "offset": "0x0300000002000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "offer_ids_by_exchange_id"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0400000002000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0500000002000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0500000003000000000000000000000000000000000000000000000000000000",
+                                          "ty": 3
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0600000002000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0600000003000000000000000000000000000000000000000000000000000000",
+                          "ty": 19
+                        }
+                      },
+                      "offset": "0x0500000003000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "offers_by_id"
+        },
+        {
+          "layout": {
+            "cell": {
+              "key": "0x0600000003000000000000000000000000000000000000000000000000000000",
+              "ty": 16
+            }
+          },
+          "name": "nonce"
+        }
+      ]
+    }
+  },
+  "types": [
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "last_vacant",
+              "type": 2,
+              "typeName": "Index"
+            },
+            {
+              "name": "len",
+              "type": 2,
+              "typeName": "u32"
+            },
+            {
+              "name": "len_entries",
+              "type": 2,
+              "typeName": "u32"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Header"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "u32"
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 7,
+                  "typeName": "VacantEntry"
+                }
+              ],
+              "name": "Vacant"
+            },
+            {
+              "fields": [
+                {
+                  "type": 4,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Occupied"
+            }
+          ]
+        }
+      },
+      "params": [
+        4
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Entry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "type": 5,
+              "typeName": "[u8; 32]"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_env",
+        "types",
+        "Hash"
+      ]
+    },
+    {
+      "def": {
+        "array": {
+          "len": 32,
+          "type": 6
+        }
+      }
+    },
+    {
+      "def": {
+        "primitive": "u8"
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "next",
+              "type": 2,
+              "typeName": "Index"
+            },
+            {
+              "name": "prev",
+              "type": 2,
+              "typeName": "Index"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "VacantEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 9,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 2,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        9
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "id",
+              "type": 4,
+              "typeName": "ExchangeId"
+            },
+            {
+              "name": "creator",
+              "type": 10,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "exchange_token",
+              "type": 11,
+              "typeName": "UniqueMultiToken"
+            },
+            {
+              "name": "initial_amount",
+              "type": 16,
+              "typeName": "Balance"
+            },
+            {
+              "name": "price",
+              "type": 16,
+              "typeName": "Balance"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "storage",
+        "Exchange"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "type": 5,
+              "typeName": "[u8; 32]"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_env",
+        "types",
+        "AccountId"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "multi_token",
+              "type": 12,
+              "typeName": "MultiToken"
+            },
+            {
+              "name": "token_id",
+              "type": 14,
+              "typeName": "Option<TokenId>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "multi_token",
+        "unique",
+        "UniqueMultiToken"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "account_id",
+              "type": 10,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "standard",
+              "type": 13,
+              "typeName": "TokenStandard"
+            }
+          ]
+        }
+      },
+      "path": [
+        "multi_token",
+        "MultiToken"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "discriminant": 0,
+              "name": "Erc20"
+            },
+            {
+              "discriminant": 1,
+              "name": "Erc721"
+            },
+            {
+              "discriminant": 2,
+              "name": "Erc1155"
+            }
+          ]
+        }
+      },
+      "path": [
+        "contract_utils",
+        "token",
+        "TokenStandard"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 15,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        15
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "u64"
+      }
+    },
+    {
+      "def": {
+        "primitive": "u128"
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 18,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 2,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        18
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 4
+        }
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 20,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 2,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        20
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "id",
+              "type": 4,
+              "typeName": "OfferId"
+            },
+            {
+              "name": "exchange_id",
+              "type": 4,
+              "typeName": "ExchangeId"
+            },
+            {
+              "name": "offer_type",
+              "type": 21,
+              "typeName": "OfferType"
+            },
+            {
+              "name": "creator",
+              "type": 10,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "price",
+              "type": 16,
+              "typeName": "Balance"
+            },
+            {
+              "name": "amount",
+              "type": 16,
+              "typeName": "Balance"
+            },
+            {
+              "name": "token",
+              "type": 11,
+              "typeName": "UniqueMultiToken"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "storage",
+        "Offer"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "discriminant": 0,
+              "name": "Buy"
+            },
+            {
+              "discriminant": 1,
+              "name": "Sell"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "storage",
+        "OfferType"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "exchange_token",
+              "type": 23,
+              "typeName": "UniqueMultiTokenInfo"
+            },
+            {
+              "name": "initial_amount",
+              "type": 16,
+              "typeName": "Balance"
+            },
+            {
+              "name": "offer_token",
+              "type": 23,
+              "typeName": "UniqueMultiTokenInfo"
+            },
+            {
+              "name": "price",
+              "type": 16,
+              "typeName": "Balance"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "input",
+        "CreateExchangeRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "account_id",
+              "type": 10,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "standard",
+              "type": 13,
+              "typeName": "TokenStandard"
+            },
+            {
+              "name": "token_id",
+              "type": 14,
+              "typeName": "Option<TokenId>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "multi_token",
+        "unique",
+        "UniqueMultiTokenInfo"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 25,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Ok"
+            },
+            {
+              "fields": [
+                {
+                  "type": 26,
+                  "typeName": "E"
+                }
+              ],
+              "name": "Err"
+            }
+          ]
+        }
+      },
+      "params": [
+        25,
+        26
+      ],
+      "path": [
+        "Result"
+      ]
+    },
+    {
+      "def": {
+        "tuple": []
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "ExchangeNotFound"
+            },
+            {
+              "name": "OfferNotFound"
+            },
+            {
+              "name": "OfferTypeMismatch"
+            },
+            {
+              "name": "InsufficientBalance"
+            },
+            {
+              "fields": [
+                {
+                  "type": 27,
+                  "typeName": "multi_token::Error"
+                }
+              ],
+              "name": "MultiToken"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "Error"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "InvalidTokenStandard"
+            },
+            {
+              "name": "BalanceRequired"
+            },
+            {
+              "name": "TokenIdRequired"
+            },
+            {
+              "name": "MetadataRequired"
+            },
+            {
+              "fields": [
+                {
+                  "type": 28,
+                  "typeName": "ink_prelude::string::String"
+                }
+              ],
+              "name": "TokenNotFound"
+            },
+            {
+              "fields": [
+                {
+                  "type": 29,
+                  "typeName": "erc20::Error"
+                }
+              ],
+              "name": "Erc20"
+            },
+            {
+              "fields": [
+                {
+                  "type": 30,
+                  "typeName": "erc721::Error"
+                }
+              ],
+              "name": "Erc721"
+            },
+            {
+              "fields": [
+                {
+                  "type": 31,
+                  "typeName": "erc1155::Error"
+                }
+              ],
+              "name": "Erc1155"
+            }
+          ]
+        }
+      },
+      "path": [
+        "multi_token",
+        "Error"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "str"
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "discriminant": 0,
+              "name": "InsufficientBalance"
+            },
+            {
+              "discriminant": 1,
+              "name": "InsufficientAllowance"
+            },
+            {
+              "discriminant": 2,
+              "name": "ZeroAddressNotAllowed"
+            },
+            {
+              "discriminant": 3,
+              "name": "MissingRole"
+            },
+            {
+              "discriminant": 4,
+              "name": "TransfersPaused"
+            }
+          ]
+        }
+      },
+      "path": [
+        "erc20",
+        "Error"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "discriminant": 0,
+              "name": "CannotFetchValue"
+            },
+            {
+              "discriminant": 1,
+              "name": "TokenIdOverflow"
+            },
+            {
+              "discriminant": 2,
+              "name": "TokenNotFound"
+            },
+            {
+              "discriminant": 3,
+              "name": "NotOwner"
+            },
+            {
+              "discriminant": 4,
+              "name": "TokenExists"
+            },
+            {
+              "discriminant": 5,
+              "name": "NotAllowed"
+            },
+            {
+              "discriminant": 6,
+              "name": "NotApproved"
+            },
+            {
+              "discriminant": 7,
+              "name": "CannotInsert"
+            },
+            {
+              "discriminant": 8,
+              "name": "CannotRemove"
+            }
+          ]
+        }
+      },
+      "path": [
+        "erc721",
+        "erc721",
+        "Error"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "discriminant": 0,
+              "name": "NotAllowed"
+            },
+            {
+              "discriminant": 1,
+              "name": "NotApproved"
+            },
+            {
+              "discriminant": 2,
+              "name": "TokenIdOverflow"
+            },
+            {
+              "discriminant": 3,
+              "name": "TokenNotFound"
+            },
+            {
+              "discriminant": 4,
+              "name": "NotOwner"
+            },
+            {
+              "discriminant": 5,
+              "name": "CannotFetchValue"
+            },
+            {
+              "discriminant": 6,
+              "name": "BurnAmountExceedsBalance"
+            },
+            {
+              "discriminant": 7,
+              "name": "InsufficientBalance"
+            },
+            {
+              "discriminant": 8,
+              "name": "ArraysLengthNotEqual"
+            },
+            {
+              "discriminant": 9,
+              "name": "CannotInsert"
+            }
+          ]
+        }
+      },
+      "path": [
+        "erc1155",
+        "erc1155",
+        "Error"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 33,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        33
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "id",
+              "type": 4,
+              "typeName": "ExchangeId"
+            },
+            {
+              "name": "creator_address",
+              "type": 10,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "exchange_token",
+              "type": 23,
+              "typeName": "UniqueMultiTokenInfo"
+            },
+            {
+              "name": "initial_amount",
+              "type": 16,
+              "typeName": "Balance"
+            },
+            {
+              "name": "price",
+              "type": 16,
+              "typeName": "Balance"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "output",
+        "ExchangeInfo"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 35,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        35
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 36
+        }
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "id",
+              "type": 4,
+              "typeName": "OfferId"
+            },
+            {
+              "name": "exchange_id",
+              "type": 4,
+              "typeName": "ExchangeId"
+            },
+            {
+              "name": "r#type",
+              "type": 21,
+              "typeName": "OfferType"
+            },
+            {
+              "name": "creator_address",
+              "type": 10,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "price",
+              "type": 16,
+              "typeName": "Balance"
+            },
+            {
+              "name": "amount",
+              "type": 16,
+              "typeName": "Balance"
+            },
+            {
+              "name": "offer_token",
+              "type": 23,
+              "typeName": "UniqueMultiTokenInfo"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "output",
+        "OfferInfo"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "exchange_id",
+              "type": 4,
+              "typeName": "ExchangeId"
+            },
+            {
+              "name": "address",
+              "type": 10,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "offer_token",
+              "type": 23,
+              "typeName": "UniqueMultiTokenInfo"
+            },
+            {
+              "name": "amount",
+              "type": 16,
+              "typeName": "Balance"
+            },
+            {
+              "name": "price",
+              "type": 16,
+              "typeName": "Balance"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "input",
+        "PlaceOfferRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "exchange_id",
+              "type": 4,
+              "typeName": "ExchangeId"
+            },
+            {
+              "name": "offer_id",
+              "type": 4,
+              "typeName": "OfferId"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "input",
+        "CancelOfferRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "exchange_id",
+              "type": 4,
+              "typeName": "ExchangeId"
+            },
+            {
+              "name": "offer_id",
+              "type": 4,
+              "typeName": "OfferId"
+            },
+            {
+              "name": "address",
+              "type": 10,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "amount",
+              "type": 16,
+              "typeName": "Balance"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "input",
+        "OfferRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "exchange_id",
+              "type": 4,
+              "typeName": "Hash"
+            },
+            {
+              "name": "offer_id",
+              "type": 4,
+              "typeName": "Hash"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "event_output",
+        "CreatedExchangeOutput"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "offer_id",
+              "type": 4,
+              "typeName": "OfferId"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "event_output",
+        "PlacedOfferOutput"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "offer_id",
+              "type": 4,
+              "typeName": "OfferId"
+            }
+          ]
+        }
+      },
+      "path": [
+        "exchange",
+        "model",
+        "event_output",
+        "CanceledOfferOutput"
+      ]
+    }
+  ]
+}

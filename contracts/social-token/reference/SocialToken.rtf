@@ -1,0 +1,44 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\vieww16860\viewh12560\viewkind0
+\deftab720
+\pard\pardeftab720\sl276\slmult1\sa200\qc\partightenfactor0
+
+\f0\b\fs22 \cf0 \ul \ulc0 SOCIAL TOKEN SMART CONTRACT\
+\pard\pardeftab720\sl276\slmult1\sa200\partightenfactor0
+
+\f1\b0 \cf0 \ulnone ERC20 token smart contract whose price is governed by an AMM, specifically a bonding curve controlled by the user.\uc0\u8232 \u8232 
+\f0\b \ul 1) createSocialToken:\uc0\u8232 
+\f1\b0 \ulnone This function initialises a new Social Token which the parameters defined before.  The user can mint an Initial Supply which gets allocated on the smart contract and can be used for withdrawal at any moment or to distribute/airdrop/\
+\pard\pardeftab720\li720\fi-360\sl276\slmult1\sa200\partightenfactor0
+\cf0 AMM Type: type of bonding curve selected. It can be linear, quadratic, exponential and sigmoid. More to be added in the future.\
+TradingSpread: spread charged for each trade. This accumulates on the smart contract and is to be divided between holders.\
+TokenName: Name of Token\
+TokenSymbol: symbol of the token\
+InitialSupply: initial supply minted on the smart contract. This can be withdraw by the social token creator at any moment. Also it can be airdropped and distributed to anyone else.\
+ FundingToken: token accepted for the AMM model (for example, DAI) erc-20\
+ Date: creation date of the token    \
+\pard\pardeftab720\sl276\slmult1\sa200\partightenfactor0
+\cf0 Parameters of the AMM:\
+\pard\pardeftab720\li720\fi-360\sl276\slmult1\sa200\partightenfactor0
+\cf0 TargetSupply: supply targeted by the user to be on the market (it can be more, this is just a target).\
+TargetPrice: price at which the social token will be trading when this TargetSupply is reached.\uc0\u8232 \
+\pard\pardeftab720\sl276\slmult1\sa200\partightenfactor0
+
+\f0\b \cf0 \ul \ulc0 2) buyToken:\uc0\u8232 
+\f1\b0 \ulnone This function is called when someone buys X social tokens. This function mints X social tokens and charges an amount Y of FundingToken determined by the bonding curve. Additionally, it charges a TradingSpread (on TrandingToken).\uc0\u8232 \
+
+\f0\b \ul 3) sellToken:\uc0\u8232 
+\f1\b0 \ulnone This function is called when someone sells X social tokens. This function burns X social tokens and gives an amount Y of FundingToken determined by the bonding curve. Additionally, it discounts a TradingSpread (on TrandingToken).\
+\
+
+\f0\b \ul 4) withdawSocialToken:\uc0\u8232 
+\f1\b0 \ulnone This function is called by the owner to withdraw some amount of the InitialSupply minted of Social Token.\uc0\u8232 \u8232 
+\f0\b \ul 5) airdropToken:\uc0\u8232 
+\f1\b0 \ulnone This function is called by the owner to airdrop a specific amount X to a given address.\
+
+\f0\b \ul 6) withdawFundinglToken:\uc0\u8232 
+\f1\b0 \ulnone This function is called by the owner to withdraw some of the tokens accumulated by the trading activity.\uc0\u8232 \u8232 \u8232 \u8232 \u8232 \u8232 \u8232 \u8232 \u8232 \u8232 \
+}

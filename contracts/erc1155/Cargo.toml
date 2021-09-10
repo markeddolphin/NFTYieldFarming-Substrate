@@ -1,0 +1,45 @@
+[package]
+name = "erc1155"
+version = "0.1.0"
+authors = ["PRIVI Protocol"]
+edition = "2018"
+resolver = "2"
+
+[dependencies]
+ink_primitives = { version = "3.0.0-rc3", default-features = false }
+ink_metadata = { version = "3.0.0-rc3", default-features = false, features = ["derive"], optional = true }
+ink_env = { version = "3.0.0-rc3", default-features = false }
+ink_storage = { version = "3.0.0-rc3", default-features = false }
+ink_lang = { version = "3.0.0-rc3", default-features = false }
+ink_prelude = { version = "3.0.0-rc3", default-features = false }
+
+scale = { package = "parity-scale-codec", version = "2.1", default-features = false, features = ["derive"] }
+scale-info = { version = "0.6.0", default-features = false, features = ["derive"], optional = true }
+
+err-derive = { version = "0.3.0", default-features = false }
+
+[dev-dependencies]
+contract-utils = { path = "../../libs/contract-utils", features = ["test-utils"]}
+
+# Should be removed once bitvecto-rs/bitvec#105 is resolved
+funty = "=1.1.0"
+
+[lib]
+name = "erc1155"
+path = "lib.rs"
+crate-type = [ "cdylib", "rlib" ]
+
+[features]
+default = ["std"]
+std = [
+    "ink_metadata/std",
+    "ink_lang/std",
+    "ink_env/std",
+    "ink_storage/std",
+    "ink_primitives/std",
+    "ink_prelude/std",
+
+    "scale/std",
+    "scale-info/std",
+]
+ink-as-dependency = []

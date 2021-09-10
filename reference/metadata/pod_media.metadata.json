@@ -1,0 +1,2885 @@
+{
+  "metadataVersion": "0.1.0",
+  "source": {
+    "hash": "0x60c12731176bd5bc0294b5cbd6b5cf6f9bd72dcd5504064a521abed3bd4dd0f8",
+    "language": "ink! 3.0.0-rc3",
+    "compiler": "rustc 1.54.0-nightly"
+  },
+  "contract": {
+    "name": "pod_crowdfunding",
+    "version": "3.0.0-rc3",
+    "authors": [
+      "Privi"
+    ]
+  },
+  "spec": {
+    "constructors": [
+      {
+        "args": [
+          {
+            "name": "substrate_erc_token_address",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          "Create a new PodMedia contract."
+        ],
+        "name": [
+          "new"
+        ],
+        "selector": "0x9bae9d5e"
+      }
+    ],
+    "docs": [],
+    "events": [
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "response",
+            "type": {
+              "displayName": [
+                "Response"
+              ],
+              "type": 52
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted a Media event is emitted"
+        ],
+        "name": "PodMediaEvent"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "contract_owner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted a PodMedia contract is initialized."
+        ],
+        "name": "ContractInitialized"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "creator",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 4
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "pod_address",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted a PodMedia is created."
+        ],
+        "name": "PodMediaCreated"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "media_symbol",
+            "type": {
+              "displayName": [
+                "String"
+              ],
+              "type": 11
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when Media Registered"
+        ],
+        "name": "MediaRegistered"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "media_symbol",
+            "type": {
+              "displayName": [
+                "String"
+              ],
+              "type": 11
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when Media Uploaded"
+        ],
+        "name": "MediaUploaded"
+      }
+    ],
+    "messages": [
+      {
+        "args": [
+          {
+            "name": "request",
+            "type": {
+              "displayName": [
+                "InitiatePodMediaRequest"
+              ],
+              "type": 32
+            }
+          }
+        ],
+        "docs": [
+          " initiatePodThis - function allow user to initiate a Pod",
+          " * `is_investing` - Boolean saying if it is an investing pod/",
+          " * `token_name` - Name of Funding Token",
+          " * `token_symbol` - Symbol of Funding Token",
+          " * `funding_target` - Target that the pod aims to raise",
+          " * `funding_token` - Funding Token",
+          " * `funding_token_price` - Price of pod token during funding phase",
+          " * `funding_date` - Timestamp of limit date to raise funds",
+          " * `amm` - Type of AMM to use",
+          " * `spread` - Spread charged on Trading Phase",
+          " * `max_price` - Max price that the pod token may have",
+          " * `max-supply` - Max supply of pod tokens to be released",
+          " * `medias` - list of media for the Media Pod",
+          " For handling percentages (like collabs parts)  we use u32 or  Integer  the range will be",
+          " MAX 10_000_000 is 100%, MIN 1 is 0.00001%",
+          " Examples: 50% is : 5_000_000, 7% is :700_000"
+        ],
+        "mutates": true,
+        "name": [
+          "initiate_pod"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 36
+        },
+        "selector": "0x37c42fc5"
+      },
+      {
+        "args": [
+          {
+            "name": "register_media_request",
+            "type": {
+              "displayName": [
+                "RegisterMediaRequest"
+              ],
+              "type": 39
+            }
+          }
+        ],
+        "docs": [
+          " This function allow a user to register a media.",
+          " registerMedia: this function is used to set the parameters of the media. Once the parameters are fixed, cannot be changed anymore.",
+          " Requester: Public address of the caller (should be pod creator)",
+          " PodAddress  Adress of the POD",
+          " MediaSymbol:  Symbol of the Media to update",
+          " ReleaseDate:  Timestamp of the release of the media",
+          " FundingToken: Token accepted to view the media",
+          " Royalty:  Royalties that goes to the creators",
+          " Price:      Price of each streaming media",
+          " PaymentType:  Type of asset streaming (fixed or dynamic)",
+          " TokenReward:  Rewards given for watching the media",
+          " TokenEntry:  Tokens for exclusive acess to the media",
+          " Collabs: Collaborators of the media + allocations",
+          " For handling percentages (like collabs parts)  we use u32 or  Integer  the range will be",
+          "  MAX 10_000_000 is 100%, MIN 1 is 0.00001%",
+          " Examples: 50% is : 5_000_000, 7% is :700_000"
+        ],
+        "mutates": true,
+        "name": [
+          "register_media"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 36
+        },
+        "selector": "0xbd47a011"
+      },
+      {
+        "args": [
+          {
+            "name": "upload_media_request",
+            "type": {
+              "displayName": [
+                "UploadMediaRequestData"
+              ],
+              "type": 42
+            }
+          }
+        ],
+        "docs": [
+          " uploadMedia: this function is called to upload Media.",
+          " MediaSymbol             string                // Id of the media uploaded",
+          " PodAddress              string  \t\t\t  // Id of the POD"
+        ],
+        "mutates": true,
+        "name": [
+          "upload_media"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 36
+        },
+        "selector": "0xad6b6fac"
+      },
+      {
+        "args": [
+          {
+            "name": "invest_pod_request",
+            "type": {
+              "displayName": [
+                "CommonPodRequest"
+              ],
+              "type": 44
+            }
+          }
+        ],
+        "docs": [
+          " investPod: this function is called when a Media is sold.",
+          " PodAddress: Address of the POD",
+          " Amount:  Amount of tokens to invest (in Funding Token)"
+        ],
+        "mutates": true,
+        "name": [
+          "invest_pod"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 36
+        },
+        "selector": "0x76adfa92"
+      },
+      {
+        "args": [
+          {
+            "name": "buy_pod_request",
+            "type": {
+              "displayName": [
+                "CommonPodRequest"
+              ],
+              "type": 44
+            }
+          }
+        ],
+        "docs": [
+          " buyPodTokens: this function is called to buy pod tokens",
+          " PodAddress  Address of the POD",
+          " Amount of pod tokens to buy"
+        ],
+        "mutates": true,
+        "name": [
+          "buy_pod_tokens"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 36
+        },
+        "selector": "0x93217544"
+      },
+      {
+        "args": [
+          {
+            "name": "sell_pod_request",
+            "type": {
+              "displayName": [
+                "CommonPodRequest"
+              ],
+              "type": 44
+            }
+          }
+        ],
+        "docs": [
+          " sellPodTokens is called to sell pod tokens",
+          " PodAddress:\tAddress of the POD",
+          " Amount:\tAmount of pod tokens to sell"
+        ],
+        "mutates": true,
+        "name": [
+          "sell_pod_tokens"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 36
+        },
+        "selector": "0xd93be351"
+      },
+      {
+        "args": [
+          {
+            "name": "media_symbol",
+            "type": {
+              "displayName": [
+                "String"
+              ],
+              "type": 11
+            }
+          }
+        ],
+        "docs": [
+          " get_media: this function is called to get a Media.",
+          " requires a media_symbol"
+        ],
+        "mutates": false,
+        "name": [
+          "get_media"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Option"
+          ],
+          "type": 47
+        },
+        "selector": "0x35cb156f"
+      },
+      {
+        "args": [
+          {
+            "name": "pod_address",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " getMediaOfPod retrieves all the media of a given Pod",
+          " It takes as input the address for the pod."
+        ],
+        "mutates": false,
+        "name": [
+          "get_media_of_pod"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Option"
+          ],
+          "type": 48
+        },
+        "selector": "0x1401aebd"
+      },
+      {
+        "args": [
+          {
+            "name": "pod_address",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " get_pod_info:  retrieve a pod_information.",
+          " pod_address"
+        ],
+        "mutates": false,
+        "name": [
+          "get_pod_info"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Option"
+          ],
+          "type": 49
+        },
+        "selector": "0xb722035b"
+      },
+      {
+        "args": [
+          {
+            "name": "pod_address",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " getPodInfo returns the information of a given pod.",
+          " It takes as input the address for the pod."
+        ],
+        "mutates": false,
+        "name": [
+          "get_pod_state"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Option"
+          ],
+          "type": 50
+        },
+        "selector": "0x3d4a559a"
+      },
+      {
+        "args": [
+          {
+            "name": "pod_address",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 4
+            }
+          }
+        ],
+        "docs": [
+          " getPodTokenPrice is called to get the market price of a pod token",
+          " PodAddress\tstring\tId of the POD"
+        ],
+        "mutates": false,
+        "name": [
+          "get_pod_token_price"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Balance"
+          ],
+          "type": 12
+        },
+        "selector": "0x1df3c067"
+      },
+      {
+        "args": [
+          {
+            "name": "token_symbol",
+            "type": {
+              "displayName": [
+                "String"
+              ],
+              "type": 11
+            }
+          }
+        ],
+        "docs": [
+          " getPodPoolOfToken returns the pod address given the token_symbol"
+        ],
+        "mutates": false,
+        "name": [
+          "get_pod_pool_of_token"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Option"
+          ],
+          "type": 51
+        },
+        "selector": "0xd42a8732"
+      },
+      {
+        "args": [
+          {
+            "name": "token_symbol",
+            "type": {
+              "displayName": [
+                "String"
+              ],
+              "type": 11
+            }
+          }
+        ],
+        "docs": [
+          " getPodTokenPriceBySymbol: this function is called to get the market price of a pod token",
+          " TokenSymbol\tstring\tSymbol of the pod"
+        ],
+        "mutates": false,
+        "name": [
+          "get_pod_token_price_by_symbol"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Balance"
+          ],
+          "type": 12
+        },
+        "selector": "0x1f800faa"
+      }
+    ]
+  },
+  "storage": {
+    "struct": {
+      "fields": [
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0100000000000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0100000001000000000000000000000000000000000000000000000000000000",
+                                          "ty": 3
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0200000000000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0200000001000000000000000000000000000000000000000000000000000000",
+                          "ty": 8
+                        }
+                      },
+                      "offset": "0x0100000001000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "pod_medias"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0200000001000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0300000001000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0300000002000000000000000000000000000000000000000000000000000000",
+                                          "ty": 3
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0400000001000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0400000002000000000000000000000000000000000000000000000000000000",
+                          "ty": 14
+                        }
+                      },
+                      "offset": "0x0300000002000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "pod_state"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0400000002000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0500000002000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0500000003000000000000000000000000000000000000000000000000000000",
+                                          "ty": 16
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0600000002000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0600000003000000000000000000000000000000000000000000000000000000",
+                          "ty": 17
+                        }
+                      },
+                      "offset": "0x0500000003000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "medias"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0600000003000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0700000003000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0700000004000000000000000000000000000000000000000000000000000000",
+                                          "ty": 16
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0800000003000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0800000004000000000000000000000000000000000000000000000000000000",
+                          "ty": 27
+                        }
+                      },
+                      "offset": "0x0700000004000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "tokens"
+        },
+        {
+          "layout": {
+            "cell": {
+              "key": "0x0800000004000000000000000000000000000000000000000000000000000000",
+              "ty": 12
+            }
+          },
+          "name": "next_pod_media_id"
+        },
+        {
+          "layout": {
+            "cell": {
+              "key": "0x0900000004000000000000000000000000000000000000000000000000000000",
+              "ty": 4
+            }
+          },
+          "name": "contract_owner"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0a00000004000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0b00000004000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0b00000005000000000000000000000000000000000000000000000000000000",
+                                          "ty": 29
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0c00000004000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0c00000005000000000000000000000000000000000000000000000000000000",
+                          "ty": 31
+                        }
+                      },
+                      "offset": "0x0b00000005000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "investments"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0c00000005000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0d00000005000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0d00000006000000000000000000000000000000000000000000000000000000",
+                                          "ty": 3
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0e00000005000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0e00000006000000000000000000000000000000000000000000000000000000",
+                          "ty": 31
+                        }
+                      },
+                      "offset": "0x0d00000006000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "amount_raised"
+        },
+        {
+          "layout": {
+            "cell": {
+              "key": "0x0e00000006000000000000000000000000000000000000000000000000000000",
+              "ty": 4
+            }
+          },
+          "name": "substrate_erc_token_address"
+        }
+      ]
+    }
+  },
+  "types": [
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "last_vacant",
+              "type": 2,
+              "typeName": "Index"
+            },
+            {
+              "name": "len",
+              "type": 2,
+              "typeName": "u32"
+            },
+            {
+              "name": "len_entries",
+              "type": 2,
+              "typeName": "u32"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Header"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "u32"
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 7,
+                  "typeName": "VacantEntry"
+                }
+              ],
+              "name": "Vacant"
+            },
+            {
+              "fields": [
+                {
+                  "type": 4,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Occupied"
+            }
+          ]
+        }
+      },
+      "params": [
+        4
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Entry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "type": 5,
+              "typeName": "[u8; 32]"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_env",
+        "types",
+        "AccountId"
+      ]
+    },
+    {
+      "def": {
+        "array": {
+          "len": 32,
+          "type": 6
+        }
+      }
+    },
+    {
+      "def": {
+        "primitive": "u8"
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "next",
+              "type": 2,
+              "typeName": "Index"
+            },
+            {
+              "name": "prev",
+              "type": 2,
+              "typeName": "Index"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "VacantEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 9,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 2,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        9
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "creator",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "pod_address",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "is_investing",
+              "type": 10,
+              "typeName": "bool"
+            },
+            {
+              "name": "amm",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "amm_address",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "spread",
+              "type": 2,
+              "typeName": "u32"
+            },
+            {
+              "name": "token_symbol",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "token_name",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "funding_token_price",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "funding_token",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "funding_target",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "investor_dividend",
+              "type": 2,
+              "typeName": "u32"
+            },
+            {
+              "name": "max_price",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "max_supply",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "sharing_pct",
+              "type": 2,
+              "typeName": "u32"
+            },
+            {
+              "name": "date",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "funding_date",
+              "type": 13,
+              "typeName": "u64"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "PodInfo"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "bool"
+      }
+    },
+    {
+      "def": {
+        "primitive": "str"
+      }
+    },
+    {
+      "def": {
+        "primitive": "u128"
+      }
+    },
+    {
+      "def": {
+        "primitive": "u64"
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 15,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 2,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        15
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "status",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "registered_media",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "total_media",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "supply_released",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "raised_funds",
+              "type": 12,
+              "typeName": "Balance"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "PodState"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 7,
+                  "typeName": "VacantEntry"
+                }
+              ],
+              "name": "Vacant"
+            },
+            {
+              "fields": [
+                {
+                  "type": 11,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Occupied"
+            }
+          ]
+        }
+      },
+      "params": [
+        11
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Entry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 18,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 2,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        18
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "creator_address",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "media_name",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "media_symbol",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "pod_address",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "media_type",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "release_date",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "view_conditions",
+              "type": 19,
+              "typeName": "ViewInfo"
+            },
+            {
+              "name": "nft_conditions",
+              "type": 24,
+              "typeName": "NftInfo"
+            },
+            {
+              "name": "is_registered",
+              "type": 10,
+              "typeName": "bool"
+            },
+            {
+              "name": "is_uploaded",
+              "type": 10,
+              "typeName": "bool"
+            },
+            {
+              "name": "royalty",
+              "type": 13,
+              "typeName": "Royalty"
+            },
+            {
+              "name": "collabs",
+              "type": 25,
+              "typeName": "Vec<Collab>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "Media"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "viewing_type",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "viewing_token",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "price",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "sharing_percent",
+              "type": 2,
+              "typeName": "u32"
+            },
+            {
+              "name": "is_streaming_live",
+              "type": 10,
+              "typeName": "bool"
+            },
+            {
+              "name": "streaming_proportions",
+              "type": 20,
+              "typeName": "StreamingProportion"
+            },
+            {
+              "name": "token_reward",
+              "type": 22,
+              "typeName": "TokenReward"
+            },
+            {
+              "name": "token_entry",
+              "type": 22,
+              "typeName": "TokenEntry"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "ViewInfo"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 21
+        }
+      }
+    },
+    {
+      "def": {
+        "tuple": [
+          11,
+          2
+        ]
+      }
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 23
+        }
+      }
+    },
+    {
+      "def": {
+        "tuple": [
+          11,
+          12
+        ]
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "funding_token",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "price",
+              "type": 12,
+              "typeName": "Balance"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "NftInfo"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 26
+        }
+      }
+    },
+    {
+      "def": {
+        "tuple": [
+          4,
+          13
+        ]
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 28,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 2,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        28
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "name",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "token_type",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "symbol",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "supply",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "lockup_date",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "creator_address",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "action",
+              "type": 11,
+              "typeName": "String"
+            }
+          ]
+        }
+      },
+      "path": [
+        "erc721",
+        "erc721",
+        "TokenInfo"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 7,
+                  "typeName": "VacantEntry"
+                }
+              ],
+              "name": "Vacant"
+            },
+            {
+              "fields": [
+                {
+                  "type": 30,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Occupied"
+            }
+          ]
+        }
+      },
+      "params": [
+        30
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Entry"
+      ]
+    },
+    {
+      "def": {
+        "tuple": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 12,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 2,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        12
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "data",
+              "type": 33,
+              "typeName": "InitiatePodMediaRequestData"
+            },
+            {
+              "name": "caller",
+              "type": 11,
+              "typeName": "String"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "InitiatePodMediaRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "function",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "address",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "signature",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "payload",
+              "type": 34,
+              "typeName": "InitiatePodMediaPayload"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "InitiatePodMediaRequestData"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "pod_info",
+              "type": 9,
+              "typeName": "PodInfo"
+            },
+            {
+              "name": "medias",
+              "type": 35,
+              "typeName": "Vec<Media>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "InitiatePodMediaPayload"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 18
+        }
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 37,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Ok"
+            },
+            {
+              "fields": [
+                {
+                  "type": 38,
+                  "typeName": "E"
+                }
+              ],
+              "name": "Err"
+            }
+          ]
+        }
+      },
+      "params": [
+        37,
+        38
+      ],
+      "path": [
+        "Result"
+      ]
+    },
+    {
+      "def": {
+        "tuple": []
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "discriminant": 0,
+              "name": "TransferError"
+            },
+            {
+              "discriminant": 1,
+              "name": "FundingPausedError"
+            },
+            {
+              "discriminant": 2,
+              "name": "FundingClosedError"
+            },
+            {
+              "discriminant": 3,
+              "name": "FundingInProgressError"
+            },
+            {
+              "discriminant": 4,
+              "name": "ContributionNotFoundError"
+            },
+            {
+              "discriminant": 5,
+              "name": "MediaAlreadyRegisteredError"
+            },
+            {
+              "discriminant": 6,
+              "name": "MediaNotRegisteredError"
+            },
+            {
+              "discriminant": 7,
+              "name": "CannotFetchValueError"
+            },
+            {
+              "discriminant": 8,
+              "name": "MediaNotFoundError"
+            },
+            {
+              "discriminant": 9,
+              "name": "FundingDateShouldBeFutureError"
+            },
+            {
+              "discriminant": 10,
+              "name": "PodShouldHaveAtLeastOneMediaError"
+            },
+            {
+              "discriminant": 11,
+              "name": "InvalidPercentageDistributionError"
+            },
+            {
+              "discriminant": 12,
+              "name": "PodAddressNotRegisteredError"
+            },
+            {
+              "discriminant": 13,
+              "name": "NegativeTokenSupplyError"
+            },
+            {
+              "discriminant": 14,
+              "name": "TokenAlreadyRegisteredError"
+            },
+            {
+              "discriminant": 15,
+              "name": "PodStateNotFounError"
+            },
+            {
+              "discriminant": 16,
+              "name": "FundingPeriodVestedError"
+            },
+            {
+              "discriminant": 17,
+              "name": "PodNotInInvestStateError"
+            },
+            {
+              "discriminant": 18,
+              "name": "PodFundingPriceShouldBeDiffFromZezoError"
+            },
+            {
+              "discriminant": 19,
+              "name": "InvalidAMMParametersError"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "Error"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "data",
+              "type": 40,
+              "typeName": "RegisterMediaRequestData"
+            },
+            {
+              "name": "caller",
+              "type": 11,
+              "typeName": "String"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "RegisterMediaRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "function",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "address",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "signature",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "payload",
+              "type": 41,
+              "typeName": "RegisterMediaPayload"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "RegisterMediaRequestData"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "requester",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "pod_address",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "media_symbol",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "funding_token",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "price",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "release_date",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "payment_type",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "token_reward",
+              "type": 22,
+              "typeName": "TokenReward"
+            },
+            {
+              "name": "token_entry",
+              "type": 22,
+              "typeName": "TokenEntry"
+            },
+            {
+              "name": "royalty",
+              "type": 13,
+              "typeName": "Royalty"
+            },
+            {
+              "name": "collabs",
+              "type": 25,
+              "typeName": "Vec<Collab>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "RegisterMediaPayload"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "function",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "address",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "signature",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "payload",
+              "type": 43,
+              "typeName": "UploadMediaPayload"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "UploadMediaRequestData"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "media_symbol",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "pod_address",
+              "type": 4,
+              "typeName": "AccountId"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "UploadMediaPayload"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "data",
+              "type": 45,
+              "typeName": "CommonPodRequestData"
+            },
+            {
+              "name": "caller",
+              "type": 11,
+              "typeName": "String"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "CommonPodRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "function",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "address",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "signature",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "payload",
+              "type": 46,
+              "typeName": "CommonPodPayload"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "CommonPodRequestData"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "pod_address",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "amount",
+              "type": 12,
+              "typeName": "Balance"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "CommonPodPayload"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 18,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        18
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 35,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        35
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 9,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        9
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 15,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        15
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 4,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        4
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "event_name",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "success",
+              "type": 10,
+              "typeName": "bool"
+            },
+            {
+              "name": "output",
+              "type": 53,
+              "typeName": "Option<Output>"
+            },
+            {
+              "name": "message",
+              "type": 74,
+              "typeName": "Option<String>"
+            },
+            {
+              "name": "hash",
+              "type": 74,
+              "typeName": "Option<String>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "Response"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 54,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        54
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "update_pods",
+              "type": 55,
+              "typeName": "Option<Vec<(AccountId, PodInfo)>>"
+            },
+            {
+              "name": "update_pod_states",
+              "type": 58,
+              "typeName": "Option<Vec<(AccountId, PodState)>>"
+            },
+            {
+              "name": "update_medias",
+              "type": 61,
+              "typeName": "Option<Vec<(MediaSymbolString, Media)>>"
+            },
+            {
+              "name": "update_streamings",
+              "type": 64,
+              "typeName": "Option<Vec<(String, Streaming)>>"
+            },
+            {
+              "name": "update_tokens",
+              "type": 68,
+              "typeName": "Option<Vec<(String, TokenInfo)>>"
+            },
+            {
+              "name": "transactions",
+              "type": 71,
+              "typeName": "Option<Vec<TransferRequest>>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "Output"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 56,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        56
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 57
+        }
+      }
+    },
+    {
+      "def": {
+        "tuple": [
+          4,
+          9
+        ]
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 59,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        59
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 60
+        }
+      }
+    },
+    {
+      "def": {
+        "tuple": [
+          4,
+          15
+        ]
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 62,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        62
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 63
+        }
+      }
+    },
+    {
+      "def": {
+        "tuple": [
+          11,
+          18
+        ]
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 65,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        65
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 66
+        }
+      }
+    },
+    {
+      "def": {
+        "tuple": [
+          11,
+          67
+        ]
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "id",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "streaming_type",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "sender_address",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "receiver_address",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "token",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "frequency",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "amount",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "starting_date",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "ending_date",
+              "type": 13,
+              "typeName": "u64"
+            },
+            {
+              "name": "action",
+              "type": 11,
+              "typeName": "String"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "Streaming"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 69,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        69
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 70
+        }
+      }
+    },
+    {
+      "def": {
+        "tuple": [
+          11,
+          28
+        ]
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 72,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        72
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 73
+        }
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "transfer_type",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "token",
+              "type": 11,
+              "typeName": "String"
+            },
+            {
+              "name": "from",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "to",
+              "type": 4,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "amount",
+              "type": 13,
+              "typeName": "u64"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_crowdfunding",
+        "pod_crowdfunding",
+        "TransferRequest"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 11,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        11
+      ],
+      "path": [
+        "Option"
+      ]
+    }
+  ]
+}

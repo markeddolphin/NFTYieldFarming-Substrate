@@ -1,0 +1,95 @@
+[profile.release]
+panic = 'unwind'
+
+[workspace]
+resolver = "2"
+
+members = [
+    'node',
+#    'pallets/*',
+    'runtime',
+    "contracts/*",
+    "libs/*",
+]
+
+[patch."https://github.com/paritytech/substrate.git"]
+# keep in alphabetical order and grouped by section
+
+# frame
+frame-benchmarking = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+frame-benchmarking-cli = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+frame-executive = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+frame-support = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+frame-system = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+frame-system-benchmarking = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+frame-system-rpc-runtime-api = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+substrate-frame-rpc-system = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+
+# pallet
+pallet-aura = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-authorship = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-balances = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-contracts = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-contracts-primitives = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-contracts-rpc  = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-contracts-rpc-runtime-api = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-grandpa = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-randomness-collective-flip = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-session = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-sudo = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-timestamp = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-transaction-payment = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-transaction-payment-rpc = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+pallet-transaction-payment-rpc-runtime-api = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+
+# sc
+sc-basic-authorship = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-cli = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-client-api = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-consensus-epochs = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-chain-spec = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-consensus = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-consensus-aura = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-consensus-slots = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-consensus-uncles = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-executor = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-finality-grandpa = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-keystore = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-network = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-rpc = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-rpc-api = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-service = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-transaction-pool = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sc-telemetry = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+
+# sp
+sp-api = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-application-crypto = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-arithmetic = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-authorship = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-block-builder = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-blockchain = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-consensus = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-consensus-aura = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-consensus-babe = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-core = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-debug-derive = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-finality-grandpa = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-inherents = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-keystore = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-io = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-maybe-compressed-blob = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-offchain = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-runtime = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-session = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-staking = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-std = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-timestamp = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-transaction-pool = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+sp-version = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+
+# other
+max-encoded-len = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+max-encoded-len-derive = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+substrate-build-script-utils = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }
+substrate-wasm-builder = { git = 'https://github.com/jaypavlina/substrate.git', rev = 'eae82ab' }

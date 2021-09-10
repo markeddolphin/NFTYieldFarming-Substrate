@@ -1,0 +1,8 @@
+unstable_features = true
+max_width = 120
+overflow_delimited_expr = true
+use_small_heuristics = "Max"
+fn_single_line = true
+imports_granularity = "Crate"
+reorder_impl_items = true
+blank_lines_upper_bound = 3

@@ -1,0 +1,17 @@
+version: "3.2"
+
+services:
+  dev:
+    container_name: privi
+    image: paritytech/ci-linux:974ba3ac-20201006
+    working_dir: /var/www/privi
+    ports:
+      - "9944:9944"
+    environment:
+      - CARGO_HOME=/var/www/privi/.cargo
+    volumes:
+      - .:/var/www/privi
+      - type: bind
+        source: ./.local
+        target: /root/.local
+    command: bash -c "cargo build --release && ./target/release/privi --dev --ws-external"

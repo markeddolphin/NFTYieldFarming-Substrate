@@ -1,0 +1,32 @@
+{
+  "name": "privi-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@redspot/chai": "^0.11.5",
+    "@redspot/decimals": "^0.11.5",
+    "@redspot/gas-reporter": "^0.11.5",
+    "@redspot/patract": "^0.11.5",
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.0.3",
+    "chai": "^4.2.0",
+    "redspot": "^0.11.5",
+    "tablemark": "^2.0.0",
+    "typescript": "^4.0.2"
+  },
+  "scripts": {
+    "node": "cargo run -p privi-node --release",
+    "build": "./scripts/build-contract.sh",
+    "build-all": "./scripts/build-artifacts.sh",
+    "test": "npx redspot test --no-compile",
+    "fmt": "prettier --config .prettierrc 'tests/**/*.ts' --write",
+    "europa": "europa --dev --tmp -lruntime=debug",
+    "jupiter": "jupiter-dev --dev --execution=Native --tmp",
+    "deploy": "REDSPOT_NETWORK=testnet npx redspot run scripts/deploy/deploy.ts --no-compile",
+    "deploylocal": "REDSPOT_NETWORK=development npx redspot run scripts/deploy/deploy.ts --no-compile"
+  },
+  "devDependencies": {
+    "@redspot/explorer": "^0.11.5",
+    "prettier": "^2.3.1"
+  }
+}

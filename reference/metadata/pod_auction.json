@@ -1,0 +1,1430 @@
+{
+  "metadataVersion": "0.1.0",
+  "source": {
+    "hash": "0xc19bd2eac67f02aaac20be9813fc4ad430bb69688bba1ef60399227d07d072f6",
+    "language": "ink! 3.0.0-rc3",
+    "compiler": "rustc 1.53.0-nightly"
+  },
+  "contract": {
+    "name": "pod_auction",
+    "version": "0.1.0",
+    "authors": [
+      "[your_name] <[your_email]>"
+    ]
+  },
+  "spec": {
+    "constructors": [
+      {
+        "args": [],
+        "docs": [],
+        "name": [
+          "new"
+        ],
+        "selector": "0x9bae9d5e"
+      }
+    ],
+    "docs": [],
+    "events": [
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "output",
+            "type": {
+              "displayName": [
+                "Output"
+              ],
+              "type": 28
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when an auction is created."
+        ],
+        "name": "AuctionCreated"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "output",
+            "type": {
+              "displayName": [
+                "Output"
+              ],
+              "type": 28
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when bid is placed"
+        ],
+        "name": "BidPlaced"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "output",
+            "type": {
+              "displayName": [
+                "Output"
+              ],
+              "type": 28
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when auction is withdrawn"
+        ],
+        "name": "AuctionWithdrawn"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "output",
+            "type": {
+              "displayName": [
+                "Output"
+              ],
+              "type": 28
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when auction is canceled and it transfer back the tokens"
+        ],
+        "name": "AuctionCanceledTransfer"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "output",
+            "type": {
+              "displayName": [
+                "Output"
+              ],
+              "type": 28
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when auction is canceled"
+        ],
+        "name": "AuctionCanceled"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "output",
+            "type": {
+              "displayName": [
+                "Output"
+              ],
+              "type": 28
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when auction is reseted"
+        ],
+        "name": "AuctionReset"
+      }
+    ],
+    "messages": [
+      {
+        "args": [],
+        "docs": [
+          " Returns the actual timestamp"
+        ],
+        "mutates": false,
+        "name": [
+          "get_block_time_stamp"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "u64"
+          ],
+          "type": 11
+        },
+        "selector": "0x73f82288"
+      },
+      {
+        "args": [
+          {
+            "name": "token_address",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 5
+            }
+          },
+          {
+            "name": "owner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "docs": [
+          " Returns the auction of the identifier (token_address, owner)",
+          " Params:",
+          " *token_address: address of the Token",
+          " *owner: address of the owner"
+        ],
+        "mutates": true,
+        "name": [
+          "get_auction_by_pair"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Option"
+          ],
+          "type": 18
+        },
+        "selector": "0x6e33afa8"
+      },
+      {
+        "args": [],
+        "docs": [
+          " Returns the list of approved users"
+        ],
+        "mutates": false,
+        "name": [
+          "get_approved_users"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Vec"
+          ],
+          "type": 19
+        },
+        "selector": "0xcf5cecf8"
+      },
+      {
+        "args": [],
+        "docs": [
+          " Returns the list of active auction (not withdrawn)"
+        ],
+        "mutates": false,
+        "name": [
+          "get_active_auctions"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Vec"
+          ],
+          "type": 20
+        },
+        "selector": "0x038c0d69"
+      },
+      {
+        "args": [
+          {
+            "name": "user",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "docs": [
+          " Approve user and add to approved users",
+          " Params:",
+          " *user: Account address of the user"
+        ],
+        "mutates": true,
+        "name": [
+          "approve_user"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0xa5a92b4a"
+      },
+      {
+        "args": [
+          {
+            "name": "user",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "docs": [
+          " Remove user from approved users",
+          " Params:",
+          " *user: Account address of the user"
+        ],
+        "mutates": true,
+        "name": [
+          "remove_user"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0x9f8c744d"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "CreateAuctionRequest"
+              ],
+              "type": 23
+            }
+          }
+        ],
+        "docs": [
+          " Create an auction",
+          " Params:",
+          " *input: CreateAuctionRequest"
+        ],
+        "mutates": true,
+        "name": [
+          "create_auction"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0xd6cd59d7"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "PlaceBidRequest"
+              ],
+              "type": 24
+            }
+          }
+        ],
+        "docs": [
+          " Create an auction",
+          " Params:",
+          " *input: CreateAuctionRequest"
+        ],
+        "mutates": true,
+        "name": [
+          "place_bid"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0x441cccf2"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "WithdrawAuctionRequest"
+              ],
+              "type": 25
+            }
+          }
+        ],
+        "docs": [
+          " Withdraw an auction",
+          " Params:",
+          " *input: WithdrawAuctionRequest"
+        ],
+        "mutates": true,
+        "name": [
+          "withdraw_auction"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0xa309f5f2"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "CancelAuctionRequest"
+              ],
+              "type": 26
+            }
+          }
+        ],
+        "docs": [
+          " Cancel an auction",
+          " Params:",
+          " *input: CancelAuctionRequest"
+        ],
+        "mutates": true,
+        "name": [
+          "cancel_auction"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0x64e3bd76"
+      },
+      {
+        "args": [
+          {
+            "name": "input",
+            "type": {
+              "displayName": [
+                "ResetAuctionRequest"
+              ],
+              "type": 27
+            }
+          }
+        ],
+        "docs": [
+          " Reset an auction",
+          " Params:",
+          " *input: ResetAuctionRequest"
+        ],
+        "mutates": true,
+        "name": [
+          "reset_auction"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0xa681c3aa"
+      },
+      {
+        "args": [
+          {
+            "name": "owner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 5
+            }
+          },
+          {
+            "name": "caller",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "docs": [
+          " Ensure that caller is the owner of the auction",
+          " Params:",
+          " *owner: AccountId of the auction owner",
+          " *caller: AccountId of the caller"
+        ],
+        "mutates": true,
+        "name": [
+          "ensure_auction_owner"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0x5d943d7b"
+      },
+      {
+        "args": [
+          {
+            "name": "caller",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "docs": [
+          " Ensure that caller is an allowed account",
+          " Params:",
+          " *caller: AccountId of the caller"
+        ],
+        "mutates": true,
+        "name": [
+          "ensure_allowed_user"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0xc802537f"
+      },
+      {
+        "args": [
+          {
+            "name": "caller",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "docs": [
+          " Ensure that caller is the owner of the contract",
+          " contract owner is set when contract is deployed",
+          " Params:",
+          " *caller: AccountId of the caller"
+        ],
+        "mutates": true,
+        "name": [
+          "ensure_contract_owner"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0x84d8efe8"
+      }
+    ]
+  },
+  "storage": {
+    "struct": {
+      "fields": [
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0100000000000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0100000001000000000000000000000000000000000000000000000000000000",
+                                          "ty": 3
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0200000000000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0200000001000000000000000000000000000000000000000000000000000000",
+                          "ty": 9
+                        }
+                      },
+                      "offset": "0x0100000001000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "auctions"
+        },
+        {
+          "layout": {
+            "cell": {
+              "key": "0x0200000001000000000000000000000000000000000000000000000000000000",
+              "ty": 5
+            }
+          },
+          "name": "owner"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0300000001000000000000000000000000000000000000000000000000000000",
+                              "ty": 1
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0400000001000000000000000000000000000000000000000000000000000000",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0400000002000000000000000000000000000000000000000000000000000000",
+                                          "ty": 15
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0500000001000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0500000002000000000000000000000000000000000000000000000000000000",
+                          "ty": 16
+                        }
+                      },
+                      "offset": "0x0400000002000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "allowed_accounts"
+        }
+      ]
+    }
+  },
+  "types": [
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "last_vacant",
+              "type": 2,
+              "typeName": "Index"
+            },
+            {
+              "name": "len",
+              "type": 2,
+              "typeName": "u32"
+            },
+            {
+              "name": "len_entries",
+              "type": 2,
+              "typeName": "u32"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Header"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "u32"
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 8,
+                  "typeName": "VacantEntry"
+                }
+              ],
+              "name": "Vacant"
+            },
+            {
+              "fields": [
+                {
+                  "type": 4,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Occupied"
+            }
+          ]
+        }
+      },
+      "params": [
+        4
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Entry"
+      ]
+    },
+    {
+      "def": {
+        "tuple": [
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "type": 6,
+              "typeName": "[u8; 32]"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_env",
+        "types",
+        "AccountId"
+      ]
+    },
+    {
+      "def": {
+        "array": {
+          "len": 32,
+          "type": 7
+        }
+      }
+    },
+    {
+      "def": {
+        "primitive": "u8"
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "next",
+              "type": 2,
+              "typeName": "Index"
+            },
+            {
+              "name": "prev",
+              "type": 2,
+              "typeName": "Index"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "VacantEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 10,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 2,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        10
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "owner",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "start_time",
+              "type": 11,
+              "typeName": "u64"
+            },
+            {
+              "name": "end_time",
+              "type": 11,
+              "typeName": "u64"
+            },
+            {
+              "name": "bid_increment",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "reserve_price",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "gathered",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "bidder",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "media_address",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "media_token_id",
+              "type": 11,
+              "typeName": "u64"
+            },
+            {
+              "name": "token_address",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "ipfs_hash",
+              "type": 13,
+              "typeName": "Vec<u8>"
+            },
+            {
+              "name": "withdrawn",
+              "type": 14,
+              "typeName": "bool"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_auction",
+        "auction",
+        "AuctionModel"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "u64"
+      }
+    },
+    {
+      "def": {
+        "primitive": "u128"
+      }
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 7
+        }
+      }
+    },
+    {
+      "def": {
+        "primitive": "bool"
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 8,
+                  "typeName": "VacantEntry"
+                }
+              ],
+              "name": "Vacant"
+            },
+            {
+              "fields": [
+                {
+                  "type": 5,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Occupied"
+            }
+          ]
+        }
+      },
+      "params": [
+        5
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Entry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 17,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 2,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        17
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "tuple": []
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 10,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        10
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 5
+        }
+      }
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 10
+        }
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 17,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Ok"
+            },
+            {
+              "fields": [
+                {
+                  "type": 22,
+                  "typeName": "E"
+                }
+              ],
+              "name": "Err"
+            }
+          ]
+        }
+      },
+      "params": [
+        17,
+        22
+      ],
+      "path": [
+        "Result"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "discriminant": 0,
+              "name": "AuctionAlreadyExist"
+            },
+            {
+              "discriminant": 1,
+              "name": "OnlyAuctionOwnerAllowed"
+            },
+            {
+              "discriminant": 2,
+              "name": "ContractError"
+            },
+            {
+              "discriminant": 3,
+              "name": "InvalidTime"
+            },
+            {
+              "discriminant": 4,
+              "name": "OnlyOwnerAllowed"
+            },
+            {
+              "discriminant": 5,
+              "name": "UserAlreadyAllowed"
+            },
+            {
+              "discriminant": 6,
+              "name": "UserIsNotAllowed"
+            },
+            {
+              "discriminant": 7,
+              "name": "AuctionNotFound"
+            },
+            {
+              "discriminant": 8,
+              "name": "AuctionHasBeenWithdrawn"
+            },
+            {
+              "discriminant": 9,
+              "name": "TransferError"
+            },
+            {
+              "discriminant": 10,
+              "name": "InsufficientBidAmount"
+            },
+            {
+              "discriminant": 11,
+              "name": "AuctionHasNoBid"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_auction",
+        "auction",
+        "Error"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "media_address",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "media_token_id",
+              "type": 11,
+              "typeName": "u64"
+            },
+            {
+              "name": "token_address",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "bid_increment",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "start_time",
+              "type": 11,
+              "typeName": "u64"
+            },
+            {
+              "name": "end_time",
+              "type": 11,
+              "typeName": "u64"
+            },
+            {
+              "name": "reserve_price",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "ipfs_hash",
+              "type": 13,
+              "typeName": "Vec<u8>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_auction",
+        "auction",
+        "CreateAuctionRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "token_address",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "owner",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "amount",
+              "type": 12,
+              "typeName": "Balance"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_auction",
+        "auction",
+        "PlaceBidRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "token_address",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "owner",
+              "type": 5,
+              "typeName": "AccountId"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_auction",
+        "auction",
+        "WithdrawAuctionRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "token_address",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "owner",
+              "type": 5,
+              "typeName": "AccountId"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_auction",
+        "auction",
+        "CancelAuctionRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "media_address",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "media_token_id",
+              "type": 11,
+              "typeName": "u64"
+            },
+            {
+              "name": "token_address",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "owner",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "bid_increment",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "end_time",
+              "type": 11,
+              "typeName": "u64"
+            },
+            {
+              "name": "reserve_price",
+              "type": 12,
+              "typeName": "Balance"
+            },
+            {
+              "name": "ipfs_hash",
+              "type": 13,
+              "typeName": "Vec<u8>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_auction",
+        "auction",
+        "ResetAuctionRequest"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "auctions",
+              "type": 20,
+              "typeName": "Vec<AuctionModel>"
+            },
+            {
+              "name": "transactions",
+              "type": 29,
+              "typeName": "Vec<Transfer>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_auction",
+        "auction",
+        "Output"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 30
+        }
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "r#type",
+              "type": 13,
+              "typeName": "Vec<u8>"
+            },
+            {
+              "name": "token",
+              "type": 13,
+              "typeName": "Vec<u8>"
+            },
+            {
+              "name": "from",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "to",
+              "type": 5,
+              "typeName": "AccountId"
+            },
+            {
+              "name": "amount",
+              "type": 12,
+              "typeName": "Balance"
+            }
+          ]
+        }
+      },
+      "path": [
+        "pod_auction",
+        "auction",
+        "Transfer"
+      ]
+    }
+  ]
+}

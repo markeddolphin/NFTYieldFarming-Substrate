@@ -1,0 +1,280 @@
+{
+  "Address": "MultiAddress",
+  "LookupSource": "MultiAddress",
+  "AccountInfo": "AccountInfoWithProviders",
+  "ChainId": "u8",
+  "chainbridge::ChainId": "u8",
+  "ResourceId": "[u8; 32]",
+  "DepositNonce": "u64",
+  "ProposalVotes": {
+    "votes_for": "Vec<MultiAddress>",
+    "votes_against": "Vec<MultiAddress>",
+    "status": "enum"
+  },
+  "TokenId": "u64",
+  "Erc721Token": {
+    "id": "TokenId",
+    "metadata": "Vec<u8>"
+  },
+  "TokenStandard": {
+    "_enum": [
+      "Erc20",
+      "Erc721",
+      "Erc1155"
+    ]
+  },
+  "UniqueMultiTokenInfo": {
+    "account_id": "AccountId",
+    "standard": "TokenStandard",
+    "token_id": "Option<TokenId>"
+  },
+  "TokenInfo": {
+    "name": "Text",
+    "accountId": "AccountId",
+    "standard": "TokenStandard"
+  },
+  "ExchangeInfo": {
+    "id": "Hash",
+    "creator_address": "AccountId",
+    "exchange_token": "UniqueMultiTokenInfo",
+    "initial_amount": "Balance",
+    "price": "Balance"
+  },
+  "OfferType": {
+    "_enum": [
+      "Buy",
+      "Sell"
+    ]
+  },
+  "OfferInfo": {
+    "id": "Hash",
+    "exchange_id": "Hash",
+    "type": "OfferType",
+    "creator_address": "AccountId",
+    "price": "Balance",
+    "amount": "Balance",
+    "offer_token": "UniqueMultiTokenInfo"
+  },
+  "HTLContractOutput": {
+    "secret_hash": "Hash",
+    "from": "AccountId",
+    "to": "AccountId",
+    "token": "UniqueMultiTokenInfo",
+    "amount": "Balance",
+    "time_lock": "u64",
+    "locked": "bool"
+  },
+  "AuctionModel": {
+    "owner": "AccountId",
+    "start_time": "u64",
+    "end_time": "u64",
+    "bid_increment": "Balance",
+    "reserve_price": "Balance",
+    "gathered": "Balance",
+    "bidder": "AccountId",
+    "media_address": "AccountId",
+    "media_token_id": "u64",
+    "token_address": "AccountId",
+    "amount": "Balance",
+    "ipfs_hash": "Vec<u8>",
+    "withdrawn": "bool"
+  },
+  "Ticker": "Text",
+  "OracleState": {
+    "_enum": [
+      "Allowed",
+      "Disallowed"
+    ]
+  },
+  "Oracle": {
+    "address": "AccountId",
+    "name": "Text",
+    "state": "OracleState"
+  },
+  "RegisterOracleRequest": {
+    "address": "AccountId",
+    "name": "Text"
+  },
+  "UpdateOracleRequest": {
+    "address": "AccountId",
+    "name": "Text"
+  },
+  "UpdateOracleStateRequest": {
+    "address": "AccountId",
+    "state:": "OracleState"
+  },
+  "PriceBucket": {
+    "token": "Ticker",
+    "prices": "BTreeMap<AccountId, Balance>",
+    "volumes": "BTreeMap<AccountId, Balance"
+  },
+  "SubmitPriceRequest": {
+    "token": "Ticker",
+    "price": "Balance",
+    "volume": "Balance"
+  },
+  "ConvertRequest": {
+    "address": "AccountId",
+    "amount": "Balance"
+  },
+  "Stream": {
+    "deposit": "Balance",
+    "rate_per_second": "Balance",
+    "remaining_balance": "Balance",
+    "start_time": "Timestamp",
+    "stop_time": "Timestamp",
+    "recipient": "AccountId",
+    "sender": "AccountId",
+    "token_address": "AccountId",
+    "is_entity": "bool"
+  },
+  "Timestamp": "u64",
+  "MediaType": {
+    "_enum": [
+      "Audio",
+      "Video",
+      "LiveAudio",
+      "LiveVideo",
+      "Blog",
+      "BlogSnap",
+      "DigitalArt"
+    ]
+  },
+  "Curve": {
+    "_enum": ["Quadratic","Linear"]
+  },
+  "ViewingType": {
+    "_enum": ["Dynamic","Fixed"]
+  },
+  "NftInfo": {
+    "funding_token": "AccountId",
+    "price": "Balance"
+  },
+  "CollabShare": "u128",
+  "Collabs": "BTreeMap<AccountId, CollabShare>",
+  "ViewInfo": {
+    "viewing_type": "ViewingType",
+    "viewing_token": "AccountId",
+    "price": "Balance",
+    "sharing_percent": "u128",
+    "is_streaming_live": "bool",
+    "streaming_proportions": "Vec<(Text, Balance)>",
+    "token_reward": "Vec<(AccountId, Balance)>",
+    "token_entry": "BTreeMap<AccountId, Balance>",
+    "duration": "u64"
+  },
+
+  "CreateMediaRequest": {
+    "name": "String",
+    "r#type": "MediaType",
+    "view_conditions": "ViewInfo",
+    "nft_conditions": "NftInfo",
+    "royalty": "Balance",
+    "collabs": "Collabs"
+  },
+
+  "CreatePodRequest": {
+    "erc20_code_hash": "Hash",
+    "endowment": "Balance",
+    "media_contract": "AccountId",
+    "medias": "Vec<CreateMediaRequest>"
+  },
+
+  "CreateInvestingPodRequest": {
+    "pod_token_symbol": "String",
+    "pod_token_name": "String",
+    "funding_token": "AccountId",
+    "funding_token_price": "Balance",
+    "funding_target": "Balance",
+    "amm": "Curve",
+    "spread": "u32",
+    "max_price": "Balance",
+    "max_supply": "Balance",
+    "funding_date": "Timestamp",
+    "erc20_code_hash": "Hash",
+    "endowment": "Balance",
+    "media_contract": "AccountId",
+    "medias": "Vec<CreateMediaRequest>"
+  },
+  "MediaStorage": "AccountId",
+  "Erc1620": "AccountId",
+  "Erc20": "AccountId",
+  "ClaimableMediaState": {
+    "_enum": ["Claimed", "Verified", "NotClaimed"]
+  },
+  "ClaimableMediaInfo": {
+    "name": "Text",
+    "artists": "Vec<AccountId>",
+    "creator": "AccountId",
+    "created_at": "Timestamp",
+    "state": "ClaimableMediaState",
+    "media": "AccountId",
+    "media_id": "u64",
+    "erc1620": "AccountId",
+    "erc20": "AccountId"
+  },
+  "DistributionProposalState": {
+    "_enum": ["Accepted", "Denied", "Pending"]
+  },
+  "Distribution": {
+    "collabs": "BTreeMap<AccountId, Balance>",
+    "validations": "BTreeMap<AccountId, bool>",
+    "state": "DistributionProposalState",
+    "created_at": "Timestamp"
+  },
+  "MediaType": {
+    "_enum": [
+      "Audio",
+      "Video",
+      "LiveAudio",
+      "LiveVideo",
+      "Blog",
+      "BlogSnap",
+      "DigitalArt"
+    ]
+  },
+  "ViewingType": {
+    "_enum": ["Dynamic","Fixed"]
+  },
+  "ViewInfo": {
+    "viewing_type": "ViewingType",
+    "viewing_token": "AccountId",
+    "price": "Balance",
+    "sharing_percent": "u128",
+    "is_streaming_live": "bool",
+    "streaming_proportions": "Vec<(Text, Balance)>",
+    "token_reward": "Vec<(AccountId, Balance)>",
+    "token_entry": "BTreeMap<AccountId, Balance>",
+    "duration": "u64"
+  },
+
+  "NftInfo": {
+    "funding_token": "AccountId",
+    "price": "Balance"
+  },
+  "CollabShare": "u128",
+  "CreateMediaRequest": {
+    "creator_address": "AccountId",
+    "media_name": "Text",
+    "pod_address": "AccountId",
+    "r#type": "MediaType",
+    "view_conditions": "ViewInfo",
+    "nft_conditions": "NftInfo",
+    "royalty": "Balance",
+    "collabs": "Option<BTreeMap<AccountId, CollabShare>>"
+  },
+  "MediaId": "u64",
+  "Media": {
+    "creator": "AccountId",
+    "media_name": "String",
+    "id": "MediaId",
+    "pod_address": "AccountId",
+    "r#type": "MediaType",
+    "release_date": "u64",
+    "view_conditions": "ViewInfo",
+    "nft_conditions": "NftInfo",
+    "is_registered": "bool",
+    "is_uploaded": "bool",
+    "royalty": "Balance"
+  }
+}

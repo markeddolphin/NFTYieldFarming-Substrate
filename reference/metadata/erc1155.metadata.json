@@ -1,0 +1,1581 @@
+{
+  "metadataVersion": "0.1.0",
+  "source": {
+    "hash": "0xbc3935417b97fe2dffc5cb86748b7f4df888dbdf2d94b133c02589b9066e2f34",
+    "language": "ink! 3.0.0-rc3",
+    "compiler": "rustc 1.54.0-nightly"
+  },
+  "contract": {
+    "name": "erc1155",
+    "version": "0.1.0",
+    "authors": [
+      "PRIVI Protocol"
+    ]
+  },
+  "spec": {
+    "constructors": [
+      {
+        "args": [],
+        "docs": [
+          "Creates a new ERC1155 token contract."
+        ],
+        "name": [
+          "new"
+        ],
+        "selector": "0x9bae9d5e"
+      }
+    ],
+    "docs": [],
+    "events": [
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "from",
+            "type": {
+              "displayName": [
+                "Option"
+              ],
+              "type": 26
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "to",
+            "type": {
+              "displayName": [
+                "Option"
+              ],
+              "type": 26
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "token_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 1
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "amount",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 16
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when a token transfer occurs."
+        ],
+        "name": "Transfer"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "from",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "to",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "id",
+            "type": {
+              "displayName": [
+                "TokenId"
+              ],
+              "type": 1
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when a token approve occurs."
+        ],
+        "name": "Approval"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "owner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "name": "operator",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "name": "approved",
+            "type": {
+              "displayName": [
+                "bool"
+              ],
+              "type": 20
+            }
+          }
+        ],
+        "docs": [
+          " Event emitted when an operator is enabled or disabled for an owner.",
+          " The operator can manage all NFTs of the owner."
+        ],
+        "name": "ApprovalForAll"
+      }
+    ],
+    "messages": [
+      {
+        "args": [
+          {
+            "name": "recipient",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "name": "amount",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 16
+            }
+          },
+          {
+            "name": "metadata",
+            "type": {
+              "displayName": [
+                "Vec"
+              ],
+              "type": 8
+            }
+          }
+        ],
+        "docs": [
+          " Creates a new token."
+        ],
+        "mutates": true,
+        "name": [
+          "mint"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0xcfdd9aa2"
+      },
+      {
+        "args": [
+          {
+            "name": "id",
+            "type": {
+              "displayName": [
+                "TokenId"
+              ],
+              "type": 1
+            }
+          },
+          {
+            "name": "amount",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 16
+            }
+          }
+        ],
+        "docs": [
+          " Burns amount token of TokenId from an account"
+        ],
+        "mutates": true,
+        "name": [
+          "burn"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0xb1efc17b"
+      },
+      {
+        "args": [
+          {
+            "name": "account",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "name": "id",
+            "type": {
+              "displayName": [
+                "TokenId"
+              ],
+              "type": 1
+            }
+          },
+          {
+            "name": "amount",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 16
+            }
+          }
+        ],
+        "docs": [
+          " Burns amount token of TokenId from `account`"
+        ],
+        "mutates": true,
+        "name": [
+          "burn_from"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0x27212bbb"
+      },
+      {
+        "args": [
+          {
+            "name": "destination",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "name": "id",
+            "type": {
+              "displayName": [
+                "TokenId"
+              ],
+              "type": 1
+            }
+          },
+          {
+            "name": "amount",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 16
+            }
+          }
+        ],
+        "docs": [
+          " Transfers the token from the caller to the given destination."
+        ],
+        "mutates": true,
+        "name": [
+          "transfer"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0x84a15da1"
+      },
+      {
+        "args": [
+          {
+            "name": "from",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "name": "to",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "name": "id",
+            "type": {
+              "displayName": [
+                "TokenId"
+              ],
+              "type": 1
+            }
+          },
+          {
+            "name": "amount",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 16
+            }
+          }
+        ],
+        "docs": [
+          " Transfer approved or owned token."
+        ],
+        "mutates": true,
+        "name": [
+          "transfer_from"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0x0b396f18"
+      },
+      {
+        "args": [
+          {
+            "name": "destination",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "name": "ids",
+            "type": {
+              "displayName": [
+                "Vec"
+              ],
+              "type": 24
+            }
+          },
+          {
+            "name": "amounts",
+            "type": {
+              "displayName": [
+                "Vec"
+              ],
+              "type": 25
+            }
+          }
+        ],
+        "docs": [
+          " Transfers tokens from the caller to the given destination. Batch Transfer"
+        ],
+        "mutates": true,
+        "name": [
+          "batch_transfer"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0xc7a9a616"
+      },
+      {
+        "args": [
+          {
+            "name": "id",
+            "type": {
+              "displayName": [
+                "TokenId"
+              ],
+              "type": 1
+            }
+          }
+        ],
+        "docs": [
+          " Returns the owner of the token."
+        ],
+        "mutates": false,
+        "name": [
+          "owner_of"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Option"
+          ],
+          "type": 26
+        },
+        "selector": "0x99720c1e"
+      },
+      {
+        "args": [
+          {
+            "name": "id",
+            "type": {
+              "displayName": [
+                "TokenId"
+              ],
+              "type": 1
+            }
+          }
+        ],
+        "docs": [
+          " Returns the metadata of the token."
+        ],
+        "mutates": false,
+        "name": [
+          "token_info_of"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Option"
+          ],
+          "type": 27
+        },
+        "selector": "0x8f38dbc0"
+      },
+      {
+        "args": [
+          {
+            "name": "owner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "name": "id",
+            "type": {
+              "displayName": [
+                "TokenId"
+              ],
+              "type": 1
+            }
+          }
+        ],
+        "docs": [
+          " Returns the balance of the owner.",
+          " This represents the amount the owner has forn a given TokenId."
+        ],
+        "mutates": false,
+        "name": [
+          "balance_of"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Balance"
+          ],
+          "type": 16
+        },
+        "selector": "0x0f755a56"
+      },
+      {
+        "args": [
+          {
+            "name": "to",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "name": "approved",
+            "type": {
+              "displayName": [
+                "bool"
+              ],
+              "type": 20
+            }
+          }
+        ],
+        "docs": [
+          " Approves or disapproves the operator for all tokens of the caller."
+        ],
+        "mutates": true,
+        "name": [
+          "set_approval_for_all"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0xcfd0c27b"
+      },
+      {
+        "args": [
+          {
+            "name": "to",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "name": "id",
+            "type": {
+              "displayName": [
+                "TokenId"
+              ],
+              "type": 1
+            }
+          }
+        ],
+        "docs": [
+          " Approves the account to transfer the specified token on behalf of the caller."
+        ],
+        "mutates": true,
+        "name": [
+          "approve"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "Result"
+          ],
+          "type": 21
+        },
+        "selector": "0x681266a0"
+      },
+      {
+        "args": [
+          {
+            "name": "owner",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          },
+          {
+            "name": "operator",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 11
+            }
+          }
+        ],
+        "docs": [
+          " Returns `true` if the operator is approved by the owner."
+        ],
+        "mutates": false,
+        "name": [
+          "is_approved_for_all"
+        ],
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "bool"
+          ],
+          "type": 20
+        },
+        "selector": "0x0f5922e9"
+      }
+    ]
+  },
+  "storage": {
+    "struct": {
+      "fields": [
+        {
+          "layout": {
+            "cell": {
+              "key": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "ty": 1
+            }
+          },
+          "name": "next_token_id"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0100000000000000000000000000000000000000000000000000000000000000",
+                              "ty": 2
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0200000000000000000000000000000000000000000000000000000000000000",
+                                      "ty": 3
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0200000001000000000000000000000000000000000000000000000000000000",
+                                          "ty": 4
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0300000000000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0300000001000000000000000000000000000000000000000000000000000000",
+                          "ty": 6
+                        }
+                      },
+                      "offset": "0x0200000001000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "tokens_by_id"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0300000001000000000000000000000000000000000000000000000000000000",
+                              "ty": 2
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0400000001000000000000000000000000000000000000000000000000000000",
+                                      "ty": 3
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0400000002000000000000000000000000000000000000000000000000000000",
+                                          "ty": 4
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0500000001000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0500000002000000000000000000000000000000000000000000000000000000",
+                          "ty": 10
+                        }
+                      },
+                      "offset": "0x0400000002000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "owners_by_token_id"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0500000002000000000000000000000000000000000000000000000000000000",
+                              "ty": 2
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0600000002000000000000000000000000000000000000000000000000000000",
+                                      "ty": 3
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0600000003000000000000000000000000000000000000000000000000000000",
+                                          "ty": 13
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0700000002000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0700000003000000000000000000000000000000000000000000000000000000",
+                          "ty": 15
+                        }
+                      },
+                      "offset": "0x0600000003000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "balances_by_account_id"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0700000003000000000000000000000000000000000000000000000000000000",
+                              "ty": 2
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0800000003000000000000000000000000000000000000000000000000000000",
+                                      "ty": 3
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0800000004000000000000000000000000000000000000000000000000000000",
+                                          "ty": 4
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0900000003000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0900000004000000000000000000000000000000000000000000000000000000",
+                          "ty": 10
+                        }
+                      },
+                      "offset": "0x0800000004000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "approvals_by_token_id"
+        },
+        {
+          "layout": {
+            "struct": {
+              "fields": [
+                {
+                  "layout": {
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "cell": {
+                              "key": "0x0900000004000000000000000000000000000000000000000000000000000000",
+                              "ty": 2
+                            }
+                          },
+                          "name": "header"
+                        },
+                        {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "cell": {
+                                      "key": "0x0a00000004000000000000000000000000000000000000000000000000000000",
+                                      "ty": 3
+                                    }
+                                  },
+                                  "name": "len"
+                                },
+                                {
+                                  "layout": {
+                                    "array": {
+                                      "cellsPerElem": 1,
+                                      "layout": {
+                                        "cell": {
+                                          "key": "0x0a00000005000000000000000000000000000000000000000000000000000000",
+                                          "ty": 17
+                                        }
+                                      },
+                                      "len": 4294967295,
+                                      "offset": "0x0b00000004000000000000000000000000000000000000000000000000000000"
+                                    }
+                                  },
+                                  "name": "elems"
+                                }
+                              ]
+                            }
+                          },
+                          "name": "entries"
+                        }
+                      ]
+                    }
+                  },
+                  "name": "keys"
+                },
+                {
+                  "layout": {
+                    "hash": {
+                      "layout": {
+                        "cell": {
+                          "key": "0x0b00000005000000000000000000000000000000000000000000000000000000",
+                          "ty": 19
+                        }
+                      },
+                      "offset": "0x0a00000005000000000000000000000000000000000000000000000000000000",
+                      "strategy": {
+                        "hasher": "Blake2x256",
+                        "postfix": "",
+                        "prefix": "0x696e6b20686173686d6170"
+                      }
+                    }
+                  },
+                  "name": "values"
+                }
+              ]
+            }
+          },
+          "name": "operator_approvals"
+        }
+      ]
+    }
+  },
+  "types": [
+    {
+      "def": {
+        "primitive": "u64"
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "last_vacant",
+              "type": 3,
+              "typeName": "Index"
+            },
+            {
+              "name": "len",
+              "type": 3,
+              "typeName": "u32"
+            },
+            {
+              "name": "len_entries",
+              "type": 3,
+              "typeName": "u32"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Header"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "u32"
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 5,
+                  "typeName": "VacantEntry"
+                }
+              ],
+              "name": "Vacant"
+            },
+            {
+              "fields": [
+                {
+                  "type": 1,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Occupied"
+            }
+          ]
+        }
+      },
+      "params": [
+        1
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Entry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "next",
+              "type": 3,
+              "typeName": "Index"
+            },
+            {
+              "name": "prev",
+              "type": 3,
+              "typeName": "Index"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "VacantEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 7,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 3,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        7
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "metadata",
+              "type": 8,
+              "typeName": "Vec<u8>"
+            }
+          ]
+        }
+      },
+      "path": [
+        "erc1155",
+        "erc1155",
+        "TokenInfo"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 9
+        }
+      }
+    },
+    {
+      "def": {
+        "primitive": "u8"
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 11,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 3,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        11
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "type": 12,
+              "typeName": "[u8; 32]"
+            }
+          ]
+        }
+      },
+      "path": [
+        "ink_env",
+        "types",
+        "AccountId"
+      ]
+    },
+    {
+      "def": {
+        "array": {
+          "len": 32,
+          "type": 9
+        }
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 5,
+                  "typeName": "VacantEntry"
+                }
+              ],
+              "name": "Vacant"
+            },
+            {
+              "fields": [
+                {
+                  "type": 14,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Occupied"
+            }
+          ]
+        }
+      },
+      "params": [
+        14
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Entry"
+      ]
+    },
+    {
+      "def": {
+        "tuple": [
+          11,
+          1
+        ]
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 16,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 3,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        16
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "u128"
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 5,
+                  "typeName": "VacantEntry"
+                }
+              ],
+              "name": "Vacant"
+            },
+            {
+              "fields": [
+                {
+                  "type": 18,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Occupied"
+            }
+          ]
+        }
+      },
+      "params": [
+        18
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "stash",
+        "Entry"
+      ]
+    },
+    {
+      "def": {
+        "tuple": [
+          11,
+          11
+        ]
+      }
+    },
+    {
+      "def": {
+        "composite": {
+          "fields": [
+            {
+              "name": "value",
+              "type": 20,
+              "typeName": "V"
+            },
+            {
+              "name": "key_index",
+              "type": 3,
+              "typeName": "KeyIndex"
+            }
+          ]
+        }
+      },
+      "params": [
+        20
+      ],
+      "path": [
+        "ink_storage",
+        "collections",
+        "hashmap",
+        "ValueEntry"
+      ]
+    },
+    {
+      "def": {
+        "primitive": "bool"
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "fields": [
+                {
+                  "type": 22,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Ok"
+            },
+            {
+              "fields": [
+                {
+                  "type": 23,
+                  "typeName": "E"
+                }
+              ],
+              "name": "Err"
+            }
+          ]
+        }
+      },
+      "params": [
+        22,
+        23
+      ],
+      "path": [
+        "Result"
+      ]
+    },
+    {
+      "def": {
+        "tuple": []
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "discriminant": 0,
+              "name": "NotAllowed"
+            },
+            {
+              "discriminant": 1,
+              "name": "NotApproved"
+            },
+            {
+              "discriminant": 2,
+              "name": "TokenIdOverflow"
+            },
+            {
+              "discriminant": 3,
+              "name": "TokenNotFound"
+            },
+            {
+              "discriminant": 4,
+              "name": "NotOwner"
+            },
+            {
+              "discriminant": 5,
+              "name": "CannotFetchValue"
+            },
+            {
+              "discriminant": 6,
+              "name": "BurnAmountExceedsBalance"
+            },
+            {
+              "discriminant": 7,
+              "name": "InsufficientBalance"
+            },
+            {
+              "discriminant": 8,
+              "name": "ArraysLengthNotEqual"
+            },
+            {
+              "discriminant": 9,
+              "name": "CannotInsert"
+            }
+          ]
+        }
+      },
+      "path": [
+        "erc1155",
+        "erc1155",
+        "Error"
+      ]
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 1
+        }
+      }
+    },
+    {
+      "def": {
+        "sequence": {
+          "type": 16
+        }
+      }
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 11,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        11
+      ],
+      "path": [
+        "Option"
+      ]
+    },
+    {
+      "def": {
+        "variant": {
+          "variants": [
+            {
+              "name": "None"
+            },
+            {
+              "fields": [
+                {
+                  "type": 7,
+                  "typeName": "T"
+                }
+              ],
+              "name": "Some"
+            }
+          ]
+        }
+      },
+      "params": [
+        7
+      ],
+      "path": [
+        "Option"
+      ]
+    }
+  ]
+}
